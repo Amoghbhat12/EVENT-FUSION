@@ -1,10 +1,10 @@
-#Event-Assisted RGB Fusion for Motion-Blur Robust Object Detection
+# Event-Assisted RGB Fusion for Motion-Blur Robust Object Detection
 
 This project demonstrates a lightweight RGB–Event fusion pipeline for improving object detection performance under motion blur. The system integrates event camera data with conventional RGB frames using a deterministic overlay-based fusion strategy, without modifying the detection network.
 
 ⚡ Optimized for real-time deployment on AMD Xilinx Kria KV260 with Prophesee IMX636 Event Camera
 
-#📷 Features
+# 📷 Features
 
 ✅ RGB + Event data fusion without model modification
 
@@ -22,7 +22,7 @@ This project demonstrates a lightweight RGB–Event fusion pipeline for improvin
 
 ✅ Embedded latency and system-level evaluation
 
-#🧠 Methodology
+# 🧠 Methodology
 
 RGB videos are converted into synthetic event streams using V2E
 
@@ -34,7 +34,7 @@ Polarity-encoded events are overlaid onto RGB frames
 
 Fused images are directly used for YOLOv8 training and inference
 
-#📊 Dataset
+# 📊 Dataset
 
 1,470 car images collected from public YouTube videos
 
@@ -49,8 +49,10 @@ RGB-only (blurred)
 Event-only
 
 Fused RGB–Event
+<img width="1298" height="289" alt="fasdf" src="https://github.com/user-attachments/assets/34fd227a-e3e3-4ee3-8e1a-621e8b40724a" />
 
-#🖥️ Hardware Platform
+
+# 🖥️ Hardware Platform
 
 Event Camera: Prophesee IMX636 (DVS)
 
@@ -70,7 +72,7 @@ Custom WIC image flashing
 
 Stable real-time event data streaming
 
-#🧪 Training & Inference
+# 🧪 Training & Inference
 
 Model: YOLOv8-M
 
@@ -84,4 +86,6 @@ Batch Size: 8
 
 Embedded inference includes RGB + Event fusion, YOLOv8 deployment, and latency evaluation on KV260.
 
-#📈 Results
+# 📈 Results
+<img width="445" height="127" alt="Screenshot 2026-01-02 230237" src="https://github.com/user-attachments/assets/9bcebed1-3ce6-4a38-8b5a-a4dec05ebba0" />
+
