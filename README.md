@@ -1,95 +1,87 @@
-Event-Assisted Fusion for Improved Object Detection in Motion-Blurred Scenarios
+Event-Assisted RGB Fusion for Motion-Blur Robust Object Detection
 
-This repository implements a lightweight RGB–Event fusion pipeline for robust object detection under motion blur. The system integrates synthetic and real event data with RGB imagery and supports both offline training and embedded deployment on the AMD Xilinx Kria KV260 platform.
+This project demonstrates a lightweight RGB–Event fusion pipeline for improving object detection performance under motion blur. The system integrates event camera data with conventional RGB frames using a deterministic overlay-based fusion strategy, without modifying the detection network.
 
-System Overview
+⚡ Optimized for real-time deployment on AMD Xilinx Kria KV260 with Prophesee IMX636 Event Camera
 
-The proposed pipeline combines event-based vision with conventional RGB sensing to improve detection robustness without modifying the detector architecture. The framework supports:
+📷 Features
 
-Synthetic event generation using V2E for large-scale training
+✅ RGB + Event data fusion without model modification
 
-Real-time event camera deployment on embedded hardware
+✅ Synthetic event generation using V2E
 
-Architecture-agnostic fusion compatible with YOLOv8
+✅ Polarity-based event overlay (ON/OFF events)
 
-Edge-friendly inference with low latency and minimal overhead
+✅ YOLOv8-compatible inference pipeline
 
-Hardware Platform
-Event Camera Deployment on AMD Kria KV260
+✅ Motion-blur robust object detection
 
-Event camera: Prophesee IMX636 (DVS)
+✅ Real-time event camera deployment on Kria KV260
 
-Embedded platform: AMD Xilinx Kria KV260
+✅ PetaLinux BSP bring-up and media pipeline debugging
 
-OS: PetaLinux BSP
+✅ Embedded latency and system-level evaluation
 
-Bring-Up and Integration
+🧠 Methodology
 
-Integrated the IMX636 event camera using PetaLinux BSP customization
+RGB videos are converted into synthetic event streams using V2E
 
-Configured device tree overlays for camera and peripheral support
+Events are accumulated over short temporal windows to form 2D event frames
 
-Debugged and validated media-ctl pipelines for correct sensor-to-userspace routing
+Event frames are temporally and spatially aligned with RGB images
 
-Verified kernel driver functionality and event stream stability
+Polarity-encoded events are overlaid onto RGB frames
 
-Built and flashed custom WIC images to enable persistent deployment
+Fused images are directly used for YOLOv8 training and inference
 
-Achieved stable, real-time event data streaming on KV260
+📊 Dataset
 
-Methodology
+1,470 car images collected from public YouTube videos
 
-RGB videos are converted into synthetic event streams using the V2E simulator, configured to emulate a DAVIS346 sensor.
+Motion blur simulated using directional blur kernels
 
-Event streams are accumulated over short temporal windows to form 2D event frames.
+Synthetic event data generated using DAVIS-style sensor configuration
 
-Event frames are temporally synchronized and spatially scaled to match RGB resolution.
+Dataset variants:
 
-Polarity-based event information is overlaid onto RGB frames using a deterministic pixel-level fusion scheme.
-
-The fused RGB–Event images are directly used by YOLOv8, requiring no architectural changes.
-
-Dataset
-
-1,470 car-centric images collected from publicly available YouTube videos
-
-Motion blur simulated using directional convolution kernels
-
-Synthetic event data generated using V2E with realistic sensor noise modeling
-
-Three dataset variants created:
-
-RGB-only (motion blurred)
+RGB-only (blurred)
 
 Event-only
 
 Fused RGB–Event
 
-Training and Inference Setup
-Training (Offline)
+🖥️ Hardware Platform
 
-Model: YOLOv8-M (Ultralytics)
+Event Camera: Prophesee IMX636 (DVS)
 
-Platform: Google Colab (NVIDIA T4, 16 GB VRAM)
+Embedded Board: AMD Xilinx Kria KV260
 
-Image size: 640 × 640
+OS: PetaLinux BSP
+
+Bring-Up Highlights
+
+Device tree configuration for event camera
+
+media-ctl pipeline debugging
+
+Kernel driver validation
+
+Custom WIC image flashing
+
+Stable real-time event data streaming
+
+🧪 Training & Inference
+
+Model: YOLOv8-M
+
+Image Size: 640 × 640
+
+Optimizer: AdamW (Cosine LR)
 
 Epochs: 100
 
-Optimizer: AdamW
+Batch Size: 8
 
-Learning rate: Cosine decay
+Embedded inference includes RGB + Event fusion, YOLOv8 deployment, and latency evaluation on KV260.
 
-Embedded Inference (KV260)
-
-Deployed YOLOv8-based inference pipeline on Kria KV260
-
-Integrated real-time RGB + event fusion
-
-Evaluated:
-
-End-to-end inference latency
-
-Event-to-frame synchronization stability
-
-System-level performance under motion blur
+📈 Results
